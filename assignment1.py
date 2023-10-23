@@ -252,20 +252,4 @@ def count_sort(arr: StaticArray) -> StaticArray:
 def sorted_squares(arr: StaticArray) -> StaticArray:
     """Receives a StaticArray where the elements are in sorted order and returns a new StaticArray with squares of the values from the original array, sorted in non-descending order. The original array must not be modified."""
 
-    length = arr.length()
-    squared_Array = StaticArray(length)
 
-    # Calculate the squares of the values
-    for index in range(length):
-        squared_Array.set(index, (arr.get(index) ** 2))
-
-    # Sort the squared values in non-descending order using insertion sort
-    for i in range(1, length):
-        key = squared_Array.get(i)
-        j = i - 1
-        while j >= 0 and key < squared_Array.get(j):
-            squared_Array.set(j + 1, squared_Array.get(j))
-            j -= 1
-        squared_Array.set(j + 1, key)
-
-    return squared_Array
