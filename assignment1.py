@@ -218,6 +218,7 @@ def count_sort(arr: StaticArray) -> StaticArray:
     """Receives a StaticArray and returns a new StaticArray with the content sorted in non-ascending order."""
 
     # Find the maximum and minimum values in the original array
+
     max_value = arr.get(0)
     min_value = arr.get(0)
 
@@ -228,19 +229,20 @@ def count_sort(arr: StaticArray) -> StaticArray:
         if item < min_value:
             min_value = item
 
-    # Create an array to count the occurrences of each value
-    count_array_length = (max_value - min_value + 1)
-    count_array = StaticArray(count_array_length)
+    # Initialize count_array as a StaticArray filled with zeros
+    count_array = StaticArray(max_value - min_value + 1)
+    for index in range(max_value - min_value + 1):
+        count_array.set(index, 0)
+
     for index in range(arr.length()):
         item = arr.get(index)
-        count_array[item - min_value] += 1
+        count_array.set(item - min_value, count_array.get(item - min_value) + 1)
 
-    # Create the sorted array
     sorted_array = StaticArray(arr.length())
     sorted_index = 0
 
     for value in range(max_value, min_value - 1, -1):
-        count = count_array[value - min_value]
+        count = count_array.get(value - min_value)
         for _ in range(count):
             sorted_array.set(sorted_index, value)
             sorted_index += 1
