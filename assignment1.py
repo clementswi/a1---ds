@@ -229,7 +229,8 @@ def count_sort(arr: StaticArray) -> StaticArray:
             min_value = item
 
     # Create an array to count the occurrences of each value
-    count_array = [0] * (max_value - min_value + 1)
+    count_array_length = (max_value - min_value + 1)
+    count_array = StaticArray(count_array_length)
     for index in range(arr.length()):
         item = arr.get(index)
         count_array[item - min_value] += 1
