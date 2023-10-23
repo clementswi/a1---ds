@@ -160,6 +160,7 @@ def is_sorted(arr: StaticArray) -> int:
 # ------------------- PROBLEM 7 - FIND_MODE -----------------------------------
 
 def find_mode(arr: StaticArray) -> tuple[object, int]:
+    """Takes a static array as parameter and returns the mode element as well as how many times it occurs"""
     length = arr.length()
 
     max_frequency = 0
@@ -254,4 +255,29 @@ def count_sort(arr: StaticArray) -> StaticArray:
 def sorted_squares(arr: StaticArray) -> StaticArray:
     """Receives a StaticArray where the elements are in sorted order and returns a new StaticArray with squares of the values from the original array, sorted in non-descending order. The original array must not be modified."""
 
+    # Find the length of the input array
+    n = arr.length()
+
+    # Initialize two pointers for the positive and negative parts of the array
+    left = 0
+    right = n - 1
+
+    # Create a result StaticArray of the same length
+    result = StaticArray(n)
+
+    # Start from the right (largest absolute value) and move towards the left
+    for i in range(n - 1, -1, -1):
+        left_val = arr.get(left)
+        right_val = arr.get(right)
+
+        if abs(left_val) > abs(right_val):
+            # Square the left value and move the left pointer
+            result.set(i, left_val * left_val)
+            left += 1
+        else:
+            # Square the right value and move the right pointer
+            result.set(i, right_val * right_val)
+            right -= 1
+
+    return result
 
