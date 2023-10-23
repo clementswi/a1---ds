@@ -75,7 +75,6 @@ def reverse(arr: StaticArray) -> None:
         arr.set(index, arr.get(opposite_index))  # Swap elements
         arr.set(opposite_index, temp)
 
-    return arr
 
 # ------------------- PROBLEM 4 - ROTATE ------------------------------------
 
